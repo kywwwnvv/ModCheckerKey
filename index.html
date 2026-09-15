@@ -47,22 +47,6 @@
         }
         .copy-btn:hover { background: #0088cc; }
         .copy-btn.copied { background: #00cc44; }
-        .new-btn {
-            background: #444;
-            color: #fff;
-            border: none;
-            padding: 10px 24px;
-            font-size: 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 15px;
-            font-weight: bold;
-            transition: 0.2s;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .new-btn:hover { background: #666; }
     </style>
 </head>
 <body>
@@ -71,17 +55,17 @@
     <div class="key" id="keyDisplay">Loading...</div>
 
     <button class="copy-btn" id="copyBtn" onclick="copyKey()">📋 Copy Key</button>
-    <button class="new-btn" id="newBtn" onclick="generateNewKey()">🔄 Generate New Key</button>
 
     <script>
         // ===== НАСТРОЙКИ =====
+        // SECRET должен совпадать со скриптом Lua!
         const SECRET = "KakashkiSecret2025_v1";
         const KEY_PREFIX = "key_";
         const KEY_LENGTH = 8;
         const MAX_INDEX = 1000;
-        const STORAGE_KEY = "modchecker_current_key";  // ключ для localStorage
+        const STORAGE_KEY = "modchecker_current_key";
 
-        // ===== 32-битная хеш-функция =====
+        // ===== 32-битная хеш-функция (XOR + rotate) =====
         function rotl32(x, n) {
             return ((x << n) | (x >>> (32 - n))) >>> 0;
         }
@@ -102,6 +86,7 @@
             return h >>> 0;
         }
 
+        // ===== Генерация ключа по индексу =====
         function generateKey(index) {
             const input = KEY_PREFIX + index + "_" + SECRET;
             const h1 = simpleHash(input, 0x811C9DC5);
@@ -116,6 +101,7 @@
             return hex.substring(0, KEY_LENGTH).toLowerCase();
         }
 
+        // ===== Случайный ключ =====
         function getRandomKey() {
             const index = Math.floor(Math.random() * MAX_INDEX) + 1;
             return generateKey(index);
@@ -132,22 +118,16 @@
                 saved = null;
             }
 
+            // Если сохранённый ключ есть и он корректной длины — используем его
             if (saved && saved.length === KEY_LENGTH) {
                 currentKey = saved;
             } else {
+                // Иначе генерируем новый и сохраняем
                 currentKey = getRandomKey();
                 try {
                     localStorage.setItem(STORAGE_KEY, currentKey);
                 } catch (e) {}
             }
-        }
-
-        function generateNewKey() {
-            currentKey = getRandomKey();
-            try {
-                localStorage.setItem(STORAGE_KEY, currentKey);
-            } catch (e) {}
-            document.getElementById("keyDisplay").textContent = currentKey;
         }
 
         // ===== Инициализация =====
