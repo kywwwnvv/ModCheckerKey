@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ModChecker By Kakashki — Key</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background: #1a1a1a;
+            color: #fff;
+            font-family: 'Segoe UI', 'Gotham', sans-serif;
+            text-align: center;
+            padding-top: 80px;
+            margin: 0;
+        }
+        h1 {
+            color: #00aaff;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        .key-box {
+            background: #252525;
+            border: 2px solid #00aaff;
+            border-radius: 12px;
+            padding: 25px 50px;
+            display: inline-block;
+            margin: 20px 0;
+            min-width: 300px;
+        }
+        .key {
+            font-size: 32px;
+            color: #00ff64;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+        }
+        .copy-btn {
+            background: #00aaff;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .copy-btn:hover {
+            background: #0088cc;
+        }
+        .copy-btn.copied {
+            background: #00cc44;
+        }
+        .note {
+            color: #666;
+            font-size: 12px;
+            margin-top: 40px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔑 ModChecker By Kakashki</h1>
+    <p class="subtitle">Your random key is:</p>
+
+    <div class="key-box">
+        <div class="key" id="keyDisplay">Loading...</div>
+    </div>
+
+    <br>
+    <button class="copy-btn" id="copyBtn" onclick="copyKey()">📋 Copy Key</button>
+
+    <p class="note">
+        Paste this key into the ModChecker GUI.<br>
+        Refresh this page to get a different key.
+    </p>
+
+    <script>
+        // ═══════════════════════════════════════════
+        // 🔧 ВПИШИ СВОИ КЛЮЧИ СЮДА:
+        // ═══════════════════════════════════════════
+        const keys = [
+            "KAKASHKI-2026",
+            "MODCHECKER-VIP",
+            "TEST-KEY-123",
+            "KAKASHKI-PRO",
+            "NIGHT-MODE-KEY"
+        ];
+        // ═══════════════════════════════════════════
+
+        // Выбираем случайный ключ
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        document.getElementById("keyDisplay").textContent = randomKey;
+
+        // Кнопка копирования
+        function copyKey() {
+            navigator.clipboard.writeText(randomKey).then(function() {
+                const btn = document.getElementById("copyBtn");
+                btn.textContent = "✅ Copied!";
+                btn.classList.add("copied");
+                setTimeout(function() {
+                    btn.textContent = "📋 Copy Key";
+                    btn.classList.remove("copied");
+                }, 2000);
+            }).catch(function(err) {
+                console.error("Copy failed:", err);
+                alert("Copy failed. Please select the key manually.");
+            });
+        }
+    </script>
+</body>
+</html>
