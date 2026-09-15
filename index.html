@@ -4,15 +4,22 @@
     <title>ModChecker By Kakashki — Key</title>
     <meta charset="UTF-8">
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             background: linear-gradient(-45deg, #0f0f1a, #1a1a2e, #16213e, #0f3460);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             color: #fff;
             font-family: 'Segoe UI', 'Gotham', sans-serif;
-            text-align: center;
-            padding-top: 120px;
-            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             min-height: 100vh;
             overflow: hidden;
         }
@@ -26,25 +33,25 @@
         h1 {
             color: #00aaff;
             font-size: 28px;
-            margin-bottom: 30px;
+            margin: 0 0 30px 0;
             text-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
         }
 
         .key {
             font-size: 32px;
-            color: #00ff64;
+            color: #000000;
             font-weight: bold;
             letter-spacing: 2px;
             font-family: 'Courier New', monospace;
-            background: rgba(37, 37, 37, 0.85);
+            background: #f0f0f0;
             border: 2px solid #00aaff;
             border-radius: 12px;
             padding: 25px 50px;
             display: inline-block;
             min-width: 300px;
+            text-align: center;
             box-shadow: 0 0 30px rgba(0, 170, 255, 0.4),
                         inset 0 0 20px rgba(0, 170, 255, 0.1);
-            backdrop-filter: blur(6px);
         }
 
         .copy-btn {
@@ -58,9 +65,6 @@
             margin-top: 25px;
             font-weight: bold;
             transition: 0.2s;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
             box-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
         }
 
@@ -76,7 +80,7 @@
     </style>
 </head>
 <body>
-    <h1>🔑 ModChecker By Kakashki</h1>
+    <h1>🔑 ModChecker By Kakashki.hub</h1>
 
     <div class="key" id="keyDisplay">Loading...</div>
 
